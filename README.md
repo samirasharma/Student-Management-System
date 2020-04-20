@@ -1,0 +1,2 @@
+# Student-Management-System
+This is a term project for student and course management. A desktop application is build using java and sql is used as a db system. This application is a menu-based main program which consists of the following two application programs :  Student Registration : Course registration menu used by students. Class List Generation : Class list will be generated for each sectio
