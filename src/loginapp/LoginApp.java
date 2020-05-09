@@ -1,16 +1,16 @@
 package loginapp;
 
-import javafx.application.*;
+import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -18,7 +18,10 @@ public class LoginApp extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = (Parent)FXMLLoader.load(getClass().getResource("login.fxml"));
+		//Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("loggin.fxml"));
+//		getClass().getClassLoader().getResource("ui_layout.fxml")
+
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("School Management System");
@@ -26,37 +29,8 @@ public class LoginApp extends Application {
 	}
 	
 	public static void main(String [] args) {
-		//launch (args);
-		final String url = "jdbc:sqlserver://LAPTOP-SAMU\\MSSQLSERVER:1433;" + "databaseName=schoolsystem;integratedSecurity=true;";
-//        String CONN = "jdbc:sqlserver://LAPTOP-LPQE1URE;";
-
-		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			System.out.println("command completed successfully");
-			try {
-				System.out.println("inside try--------");
-//				Connection con = DriverManager.getConnection(CONN);
-				
-				Connection connection = DriverManager.getConnection(url,"","");
-				JOptionPane.showMessageDialog(null, "Connected");
-
-				Statement stmt = connection.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * from testdb.dbo.Person");
-				while (rs.next()) {
-					  String lastName = rs.getString("LastName");
-					  System.out.println(lastName + "\n");
-					}
-				connection.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace(); 
-			}
-			
-			//Statement stmt  = CONN.createStatement();
-		}
-		catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
+		launch (args);
+		
 		
 	}
 	
