@@ -12,27 +12,28 @@
    <children>
       <TabPane prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Student Course Registration">
+          <Tab text="Student Course Registration Fall 2020">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
                      <children>
                         <HBox prefHeight="574.0" prefWidth="1280.0">
                            <children>
-                              <TableView fx:id="coursetable" prefHeight="574.0" prefWidth="1409.0">
+                              <TableView fx:id="coursetable" prefHeight="574.0" prefWidth="1278.0">
                                 <columns>
-                                  <TableColumn fx:id="coursenocolumn" prefWidth="130.0" text="Course_No" />
-                                  <TableColumn fx:id="secnocolumn" prefWidth="135.0" text="Section_No" />
-                                    <TableColumn fx:id="capacitycolumn" prefWidth="132.0" text="Capacity" />
-                                    <TableColumn fx:id="registeredcolumn" minWidth="4.0" prefWidth="126.0" text="Registered" />
-                                    <TableColumn fx:id="remainingcolumn" minWidth="0.0" prefWidth="111.0" text="Remaining" />
-                                    <TableColumn fx:id="classdaycolumn" minWidth="0.0" prefWidth="357.0" text="Class Day" />
-                                    <TableColumn fx:id="classtimecolumn" minWidth="0.0" prefWidth="165.0" text="Class Time" />
-                                    <TableColumn fx:id="instructorcolumn" minWidth="0.0" prefWidth="165.0" text="Instructor" />
+                                  <TableColumn fx:id="coursenocolumn" prefWidth="96.0" text="Course_No" />
+                                  <TableColumn fx:id="secnocolumn" prefWidth="111.0" text="Section_No" />
+                                    <TableColumn fx:id="capacitycolumn" prefWidth="83.0" text="Capacity" />
+                                    <TableColumn fx:id="registeredcolumn" minWidth="4.0" prefWidth="92.0" text="Registered" />
+                                    <TableColumn fx:id="remainingcolumn" minWidth="0.0" prefWidth="83.0" text="Remaining" />
+                                    <TableColumn fx:id="classdaycolumn" minWidth="0.0" prefWidth="397.0" text="Class Day" />
+                                    <TableColumn fx:id="classtimecolumn" minWidth="0.0" prefWidth="164.0" text="Class Time" />
+                                    <TableColumn fx:id="instructorcolumn" minWidth="0.0" prefWidth="295.0" text="Instructor" />
                                 </columns>
                               </TableView>
                            </children>
                         </HBox>
-                        <Button layoutX="121.0" layoutY="622.0" mnemonicParsing="false" onAction="#loadStudentData" prefHeight="31.0" prefWidth="285.0" text="Button" />
+                        <Button layoutX="14.0" layoutY="615.0" mnemonicParsing="false" onAction="#loadStudentData" prefHeight="37.0" prefWidth="285.0" text="Fall 2020 courses" />
+                        <Button layoutX="331.0" layoutY="615.0" mnemonicParsing="false" onAction="#registerCourse" prefHeight="37.0" prefWidth="285.0" text="Register" />
                      </children>
                   </AnchorPane>
             </content>

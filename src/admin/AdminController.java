@@ -34,8 +34,6 @@ public class AdminController implements Initializable{
 	private TableColumn<StudentData,String> weekdaycolumn;
 	@FXML
 	private TableColumn<StudentData,String> instructorcolumn;
-//	@FXML
-//	private TableColumn<StudentData,String> studentcolumn;
 
 	private dbConnection dc;
 	private ObservableList<StudentData> data;	
@@ -56,11 +54,9 @@ public class AdminController implements Initializable{
 			while(rs.next()) {
 				System.out.println("Query result is---------------");
 				System.out.println(rs.getString(1)+ rs.getString(2)+ rs.getString(3)+ rs.getString(4)+ rs.getString(5)+ rs.getString(6));
-				//this.data.add(new StudentData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
 				this.data.add(new StudentData(rs.getString(4),rs.getString(3),"abc",rs.getString(6),rs.getString(2),rs.getString(5),"vincent"));
-
 			}
-			
+		
 		}catch(SQLException ex){
 			
 			System.err.println("Error"+ex);
@@ -74,9 +70,6 @@ public class AdminController implements Initializable{
 		this.placecolumn.setCellValueFactory(new PropertyValueFactory<StudentData, String>("place"));
 		this.weekdaycolumn.setCellValueFactory(new PropertyValueFactory<StudentData, String>("weekday"));
 		this.instructorcolumn.setCellValueFactory(new PropertyValueFactory<StudentData, String>("instructor"));
-//		this.studentcolumn.setCellValueFactory(new PropertyValueFactory<StudentData, String>("student"));
-		
-		//this.studenttable.setItems(null);
 		this.studenttable.setItems(this.data);
 		
 	}

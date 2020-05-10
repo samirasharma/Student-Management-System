@@ -45,6 +45,7 @@ public class LoginController implements Initializable{
 	}
 	@FXML
 	public void Login(ActionEvent event) {
+		String name = this.username.getText().toString();
 		try {
 			if(this.loginModel.isLogin(this.username.getText(),this.password.getText(),((option)this.combobox.getValue()).toString()))
 			{
@@ -57,7 +58,7 @@ public class LoginController implements Initializable{
 					break;
 				case "Student":
 					System.out.println("inside student"+this.combobox.getValue().toString());
-					studentLogin();
+					studentLogin(name);
 					break;
 				}
 			}
@@ -69,48 +70,26 @@ public class LoginController implements Initializable{
 		}
 		
 	}
-	public void studentLogin() {
+	public void studentLogin(String name) {
 		try {
-//			System.out.println("inside student login");
-//			Stage userstage = new Stage();
-//			FXMLLoader loader = new FXMLLoader();
-//			Pane root = (Pane)loader.load(getClass().getClassLoader().getResource("/students/studentFXML.fxml").openStream());
-//			StudentController studentController = (StudentController)loader.getController();
-//			Scene scene = new Scene(root);
-//			userstage.setScene(scene);
-//			userstage.setTitle("Student Dashboard");
-//			userstage.setResizable(false);
-//			userstage.show();
 			System.out.println("inside student login");
-			Stage userstage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/students/studentFXML.fxml"));
-			FXMLLoader studentloader = new FXMLLoader();
-			StudentController adminController = (StudentController)studentloader.getController();
+			FXMLLoader studentloader = new FXMLLoader();		
+			StudentController studentController = (StudentController)studentloader.getController();
+			//studentController.setusername(name.toString());
+			Stage userstage = new Stage();
 			Scene scene = new Scene(root);
 			userstage.setScene(scene);
 			userstage.setTitle("Student Dashboard");
 			userstage.setResizable(false);
-			userstage.show();
+			userstage.showAndWait();
 		}catch(IOException ex) {
 			ex.printStackTrace();
 		}
 		
 	}
 	public void adminLogin() {
-		try {
-//			System.out.println("inside admin login");
-//			Stage adminstage = new Stage();
-//			FXMLLoader adminLoader = new FXMLLoader();
-//			Parent adminroot = adminLoader.load(getClass().getClassLoader().getResource("/admin/admin.fxml").openStream());
-//			AdminController adminController = (AdminController)adminLoader.getController();
-//			Scene scene = new Scene(adminroot);
-//			adminstage.setScene(scene);
-//			adminstage.setTitle("Admin Dashboard");
-//			adminstage.setResizable(false);
-//			adminstage.show();
-			
-			
-			
+		try {			
 			System.out.println("inside admin login");
 			Stage adminstage = new Stage();
 			Parent adminroot = FXMLLoader.load(getClass().getResource("/admin/admin.fxml"));

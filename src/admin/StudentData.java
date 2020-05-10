@@ -12,7 +12,6 @@ public class StudentData {
 	private final StringProperty place;
 	private final StringProperty weekday;
 	private final StringProperty instructor;
-//	private final StringProperty student;
 	
 	public StringProperty CoursecodeProperty() {
 		return coursecode;
@@ -97,11 +96,7 @@ public class StudentData {
 	public String getInstructor() {
 		return instructor.get();
 	}
-//	public StringProperty getStudent() {
-//		return student;
-//	}
-//	
-//	public StudentData(String coursecode, String seccode,String coursename, String time, String place, String weekday, String instructor, String student) {
+
 	public StudentData(String coursecode, String seccode,String coursename, String time, String place, String weekday, String instructor) {
 	
 		this.coursecode = new SimpleStringProperty(coursecode);
@@ -116,8 +111,6 @@ public class StudentData {
 		this.weekday = new SimpleStringProperty(weekday);
 
 		this.instructor = new SimpleStringProperty(instructor);
-
-//		this.student = new SimpleStringProperty(student);
 
 	}
 
