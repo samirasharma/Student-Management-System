@@ -31,14 +31,15 @@ public class StudentController implements Initializable {
 	@FXML
 	private TableColumn<CourseData,String> remainingcolumn;
 	@FXML
+	private TableColumn<CourseData,String> classdaycolumn;
+	@FXML
+	private TableColumn<CourseData,String> classtimecolumn;
+	@FXML
 	private TableColumn<CourseData,String> instructorcolumn;
-//	@FXML
-//	private TableColumn<StudentData,String> studentcolumn;
 
 	private dbConnection dc;
 	private ObservableList<CourseData> data;	
-	private String sql = "SELECT * FROM SCHOOLDB.dbo.SectionRoom";
-
+	private String sql = "Select Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name from Section Se, Staff St where Se.Instructor_ssn = St.Staff_ssn;";
 	
 	public void initialize(URL url, ResourceBundle rb) {
 		this.dc = new dbConnection();
@@ -47,15 +48,14 @@ public class StudentController implements Initializable {
 	@FXML
 	private void loadStudentData(ActionEvent event) throws SQLException{
 		try {
-			System.out.println("inside load student data in admin tab");
+			System.out.println("inside load student data in student tab");
 			Connection conn = dbConnection.getConnection();
 			this.data = FXCollections.observableArrayList();
 			ResultSet rs = conn.createStatement().executeQuery(sql);
 			while(rs.next()) {
 				System.out.println("Query result is---------------");
-				System.out.println(rs.getString(1)+ rs.getString(2)+ rs.getString(3)+ rs.getString(4)+ rs.getString(5)+ rs.getString(6));
-				//this.data.add(new StudentData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
-				this.data.add(new CourseData(rs.getString(4),rs.getString(3),rs.getString(6),rs.getString(2),rs.getString(5),"vincent"));
+				System.out.println(rs.getString(2)+rs.getString(1)+rs.getString(3)+"0"+rs.getString(3)+rs.getString(4)+rs.getString(5)+rs.getString(6));
+				this.data.add(new CourseData(rs.getString(2),rs.getString(1),rs.getString(3),"0",rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
 
 			}
 			
@@ -67,9 +67,11 @@ public class StudentController implements Initializable {
 		
 		this.coursenocolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("coursecode"));
 		this.secnocolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("seccode"));
-		this.capacitycolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("coursename"));
-		this.registeredcolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("time"));
-		this.remainingcolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("place"));
+		this.capacitycolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("capacity"));
+		this.registeredcolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("registered"));
+		this.remainingcolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("remaining"));
+		this.classdaycolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("classday"));
+		this.classtimecolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("classtime"));
 		this.instructorcolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("instructor"));
 //		this.studentcolumn.setCellValueFactory(new PropertyValueFactory<StudentData, String>("student"));
 		

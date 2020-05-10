@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentController">
    <children>
       <TabPane prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
@@ -23,10 +22,12 @@
                                 <columns>
                                   <TableColumn fx:id="coursenocolumn" prefWidth="130.0" text="Course_No" />
                                   <TableColumn fx:id="secnocolumn" prefWidth="135.0" text="Section_No" />
-                                    <TableColumn fx:id="capacitycolumn" prefWidth="237.0" text="Capacity" />
-                                    <TableColumn fx:id="registeredcolumn" minWidth="4.0" prefWidth="163.0" text="Registered" />
-                                    <TableColumn fx:id="remainingcolumn" minWidth="0.0" prefWidth="161.0" text="Remaining" />
-                                    <TableColumn fx:id="instructorcolumn" minWidth="0.0" prefWidth="401.0" text="Instructor" />
+                                    <TableColumn fx:id="capacitycolumn" prefWidth="132.0" text="Capacity" />
+                                    <TableColumn fx:id="registeredcolumn" minWidth="4.0" prefWidth="126.0" text="Registered" />
+                                    <TableColumn fx:id="remainingcolumn" minWidth="0.0" prefWidth="111.0" text="Remaining" />
+                                    <TableColumn fx:id="classdaycolumn" minWidth="0.0" prefWidth="357.0" text="Class Day" />
+                                    <TableColumn fx:id="classtimecolumn" minWidth="0.0" prefWidth="165.0" text="Class Time" />
+                                    <TableColumn fx:id="instructorcolumn" minWidth="0.0" prefWidth="165.0" text="Instructor" />
                                 </columns>
                               </TableView>
                            </children>

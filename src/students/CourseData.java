@@ -9,6 +9,8 @@ public class CourseData {
 	private final StringProperty capacity;
 	private final StringProperty registered;
 	private final StringProperty remaining;
+	private final StringProperty classday;
+	private final StringProperty classtime;
 	private final StringProperty instructor;
 //	private final StringProperty student;
 	
@@ -30,6 +32,13 @@ public class CourseData {
 
 	public StringProperty RemainingProperty() {
 		return remaining;
+	}
+
+	public StringProperty ClassdayProperty() {
+		return classday;
+	}
+	public StringProperty ClasstimeProperty() {
+		return classtime;
 	}
 
 	public StringProperty InstructorProperty() {
@@ -56,7 +65,12 @@ public class CourseData {
 		this.remaining.set(remaining);
 	}
 
-	
+	public void setClassday(String classday) {
+		this.classday.set(classday);
+	}
+	public void setClasstime(String classtime) {
+		this.classtime.set(classtime);
+	}
 	public void setInstructor(String instructor) {
 		this.instructor.set(instructor);
 	}
@@ -80,15 +94,22 @@ public class CourseData {
 	public String getRemaining() {
 		return remaining.get();
 	}
+	public String getClassday() {
+		return classday.get();
+	}
+	public String getClasstime() {
+		return classtime.get();
+	}
 
 	public String getInstructor() {
 		return instructor.get();
 	}
 	
 //	public StudentData(String coursecode, String seccode,String coursename, String time, String place, String weekday, String instructor, String student) {
-	public CourseData(String coursecode, String seccode,String capacity, String registered, String remaining, String instructor) {
+	public CourseData(String coursecode, String seccode,String capacity, String registered, String remaining, String classday, String  classtime, String instructor) {
 	
 		this.coursecode = new SimpleStringProperty(coursecode);
+		
 		this.seccode = new SimpleStringProperty(seccode);
 
 		this.capacity = new SimpleStringProperty(capacity);
@@ -96,11 +117,14 @@ public class CourseData {
 		this.registered = new SimpleStringProperty(registered);
 
 		this.remaining = new SimpleStringProperty(remaining);
+		
+		this.classday = new SimpleStringProperty(classday);
+		
+		this.classtime = new SimpleStringProperty(classtime);
+
 
 		this.instructor = new SimpleStringProperty(instructor);
-
-//		this.student = new SimpleStringProperty(student);
-
+		
 	}
 
 }
