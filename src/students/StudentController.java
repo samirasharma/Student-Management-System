@@ -14,8 +14,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -45,8 +48,7 @@ public class StudentController implements Initializable {
 
 	private dbConnection dc;
 	private ObservableList<CourseData> data;	
-//	private String sql = "Select Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name from Section Se, Staff St where Se.Instructor_ssn = St.Staff_ssn;";
-	
+	int Registered = 0;
 	public void initialize(URL url, ResourceBundle rb) {
 		this.dc = new dbConnection();
 	}
@@ -60,10 +62,8 @@ public class StudentController implements Initializable {
 			this.data = FXCollections.observableArrayList();
 			ResultSet rs = conn.createStatement().executeQuery(sql);
 			while(rs.next()) {
-				System.out.println("Query result is---------------");
 				System.out.println(rs.getString(2)+rs.getString(1)+rs.getString(3)+"0"+rs.getString(3)+rs.getString(4)+rs.getString(5)+rs.getString(6));
 				this.data.add(new CourseData(rs.getString(2),rs.getString(1),rs.getString(3),"0",rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
-
 			}
 			
 		}catch(SQLException ex){
@@ -86,28 +86,45 @@ public class StudentController implements Initializable {
 	}
 	@FXML
 	private void registerCourse(ActionEvent event) throws SQLException{
-		int Registered = 0;
-		String dbcoursecode,dbsectionno,studentname;
+		String dbcoursecode,dbsectionno,studentname, registeredcourseno;
 		ObservableList<CourseData> coursedata1;
 		coursedata1 = coursetable.getSelectionModel().getSelectedItems();
 		System.out.println(coursedata1.get(0).getCoursecode());
 		dbcoursecode = coursedata1.get(0).getCoursecode();
 		dbsectionno = coursedata1.get(0).getSeccode();
+		registeredcourseno = coursedata1.get(0).getSeccode();
 		studentname="62967203";
 		String sqlinsert = "Insert into Registration(S_id,Sec_no,Course_code) VALUES (?,?,?)";
-		try {
-			Connection c = dbConnection.getConnection();
-			PreparedStatement stmt = c.prepareStatement(sqlinsert);
-			stmt.setString(1, studentname);
-			stmt.setString(2, dbsectionno);
-			stmt.setString(3, dbcoursecode);
-			stmt.execute();
-			c.close();
-			System.out.println("Query result is---------------");
-			System.out.println();
-			Registered++;
-			}catch(SQLException ex) {
-			System.err.println("SQL Error"+ex);
+		if(Registered<=3) {
+		
+			try {
+				Connection c = dbConnection.getConnection();
+				PreparedStatement stmt = c.prepareStatement(sqlinsert);
+				stmt.setString(1, studentname);
+				stmt.setString(2, dbsectionno);
+				stmt.setString(3, dbcoursecode);
+				stmt.execute();
+				Registered++;
+				System.out.println("registered course number ="+Registered);
+				//this.coursetable.set
+				//this.registeredcolumn.setCellFactory(Registered.toString());
+				//coursedata1.set(coursedata1.get(0).getRegistered(), Registered);
+				c.close();	
+				}catch(SQLException ex) {
+				
+					System.err.println("SQL Error"+ex);
+			
+					Alert alert = new Alert(AlertType.ERROR);
+					String contentText = String.format("User cannot register same course multiple times");
+					alert.setContentText(contentText);
+			                  alert.showAndWait();
+			
+				}
+		}else {
+			Alert alert = new Alert(AlertType.ERROR);
+			  String contentText = String.format("User cannot register more than 3 courses");
+			  alert.setContentText(contentText);
+			                  alert.showAndWait();
 			
 		}
 		
