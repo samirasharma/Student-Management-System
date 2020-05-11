@@ -23,7 +23,7 @@
                                   <TableColumn fx:id="coursenocolumn" prefWidth="96.0" text="Course_No" />
                                   <TableColumn fx:id="secnocolumn" prefWidth="111.0" text="Section_No" />
                                     <TableColumn fx:id="capacitycolumn" prefWidth="83.0" text="Capacity" />
-                                    <TableColumn fx:id="registeredcolumn" minWidth="4.0" prefWidth="92.0" text="Registered" />
+                                    <TableColumn fx:id="registeredcolumn" minWidth="4.0" prefWidth="92.0" resizable="false" text="Registered" />
                                     <TableColumn fx:id="remainingcolumn" minWidth="0.0" prefWidth="83.0" text="Remaining" />
                                     <TableColumn fx:id="classdaycolumn" minWidth="0.0" prefWidth="318.0" text="Class Day" />
                                     <TableColumn fx:id="classtimecolumn" minWidth="0.0" prefWidth="97.0" text="Class Time" />

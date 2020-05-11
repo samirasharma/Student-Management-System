@@ -44,7 +44,7 @@
                                   <TableColumn fx:id="firstnamecolumn" prefWidth="83.0" text="first name" />
                                     <TableColumn fx:id="idcolumn" prefWidth="82.0" text="id" />
                                     <TableColumn fx:id="majorcolumn" prefWidth="75.0" text="Major" />
-                                    <TableColumn prefWidth="77.0" text="Year" />
+                                    <TableColumn fx:id="yearcolumn" prefWidth="77.0" text="Year" />
                                 </columns>
                               </TableView>
                            </children>
