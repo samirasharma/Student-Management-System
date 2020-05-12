@@ -35,28 +35,11 @@ public class LoginModel {
 	{
 		System.out.println("inside islogin");
 		
-//		try {
-//		System.out.println("inside try--------");		
-//		Connection connection = DriverManager.getConnection(url,"","");
-//		//JOptionPane.showMessageDialog(null, "Connected");
-//
-//		Statement stmt = connection.createStatement();
-//		ResultSet rs = stmt.executeQuery("SELECT * from SCHOOLDB.dbo.Student");
-//		while (rs.next()) {
-//			  String lastName = rs.getString("S_name");
-//			  System.out.println(lastName + "\n");
-//			}
-//		connection.close();
-//	} catch (SQLException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace(); 
-//	}
 		PreparedStatement pr = null;
 		ResultSet rs = null;
 		String sql = "SELECT * from login where username = ? and password = ? and level = ?";
 		try {
 			System.out.println("inside try");
-			//Statement stmt = this.connection.createStatement();
 			pr = this.connection.prepareStatement(sql);
 			pr.setString( 1, user);
 			pr.setString(2, pass);
@@ -64,10 +47,7 @@ public class LoginModel {
 			
 			rs = pr.executeQuery();
 			boolean bool1;
-//			while (rs.next()) {
-//				  String lastName = rs.getString("username");
-//				  System.out.println(lastName + "\n");
-//				}
+
 			if(rs.next()) {
 				System.out.println("inside rs next");
 				return true;

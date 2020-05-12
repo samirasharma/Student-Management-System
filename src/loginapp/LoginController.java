@@ -76,7 +76,6 @@ public class LoginController implements Initializable{
 			Parent root = FXMLLoader.load(getClass().getResource("/students/studentFXML.fxml"));
 			FXMLLoader studentloader = new FXMLLoader();		
 			StudentController studentController = (StudentController)studentloader.getController();
-			//studentController.setusername(name.toString());
 			Stage userstage = new Stage();
 			Scene scene = new Scene(root);
 			userstage.setScene(scene);

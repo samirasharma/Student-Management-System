@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import admin.StudentData;
 import students.CourseData;
 import dbUtil.dbConnection;
 import javafx.beans.value.ChangeListener;
@@ -18,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -45,7 +47,8 @@ public class StudentController implements Initializable {
 	private TableColumn<CourseData,String> classtimecolumn;
 	@FXML
 	private TableColumn<CourseData,String> instructorcolumn;
-
+	@FXML
+	private Label studentcoursefield; 
 	private dbConnection dc;
 	private ObservableList<CourseData> data;	
 	int Registered = 0;
@@ -57,19 +60,21 @@ public class StudentController implements Initializable {
 	
 	@FXML
 	private void loadStudentData(ActionEvent event) throws SQLException{
-		//loaddatafromdb();
 		try {
 			System.out.println("inside try of load data from dab============");
-			String sql = "Select Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name from Section Se, Staff St where Se.Instructor_ssn = St.Staff_ssn;";
+			//String sql = "Select Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name from Section Se, Staff St where Se.Instructor_ssn = St.Staff_ssn;";
+			String sql = "Select Se.Course_code,Se.Sec_no, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name, count (Se.Sec_no) as Registered from \r\n" + 
+					" Section Se, Registration R, Staff St \r\n" + 
+					" where Se.Instructor_ssn = St.Staff_ssn and R.Course_code = Se.Course_code and R.Sec_no = Se.Sec_no \r\n" + 
+					" group by Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name;";
 			System.out.println("inside load student data in student tab");
 			Connection conn = dbConnection.getConnection();
 			this.data = FXCollections.observableArrayList();
 			ResultSet rs = conn.createStatement().executeQuery(sql);
-			//remainingno = Integer.parseInt(rs.getString(3)) - registeredtotalno;
+
 			while(rs.next()) {
 				System.out.println(rs.getString(2)+rs.getString(1)+rs.getString(3)+String.valueOf(registeredtotalno)+rs.getString(3)+rs.getString(4)+rs.getString(5)+rs.getString(6));
-				remainingno = Integer.parseInt(rs.getString(3)) - registeredtotalno;
-				this.data.add(new CourseData(rs.getString(2),rs.getString(1),rs.getString(3),String.valueOf(registeredtotalno),String.valueOf(remainingno),rs.getString(4),rs.getString(5),rs.getString(6)));
+				this.data.add(new CourseData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(7),String.valueOf(Integer.parseInt(rs.getString(3))-Integer.parseInt(rs.getString(7))),rs.getString(4),rs.getString(5),rs.getString(6)));
 			}
 			
 		}catch(SQLException ex){
@@ -99,14 +104,12 @@ public class StudentController implements Initializable {
 		System.out.println(coursedata1.get(0).getCoursecode());
 		dbcoursecode = coursedata1.get(0).getCoursecode();
 		dbsectionno = coursedata1.get(0).getSeccode();
-		//registeredtotalno= Integer.parseInt(coursedata1.get(0).getRegistered());
-		//remainingno= Integer.parseInt(coursedata1.get(0).getRemaining());
 		studentname="62967203";
+		Connection c = dbConnection.getConnection();
 		String sqlinsert = "Insert into Registration(S_id,Sec_no,Course_code) VALUES (?,?,?)";
-		if(Registered<=3) {
+		if(Registered<3) {
 		
 			try {
-				Connection c = dbConnection.getConnection();
 				PreparedStatement stmt = c.prepareStatement(sqlinsert);
 				stmt.setString(1, studentname);
 				stmt.setString(2, dbsectionno);
@@ -114,25 +117,27 @@ public class StudentController implements Initializable {
 				stmt.execute();
 				Registered++;
 				System.out.println("registered course number ="+Registered);
-				registeredtotalno++;
-				//remainingno--;
 				Alert alert = new Alert(AlertType.INFORMATION);
 				String contentText = String.format("Registration Successful");
 				alert.setContentText(contentText);
-		        alert.showAndWait();
-				c.close();	
-				//loaddatafromdb();
-					
+		        alert.showAndWait();			
 				
 				}catch(SQLException ex) {
 				
 					System.err.println("SQL Error"+ex);
-					alertErrorMessage("User cannot register same course multiple times");			
+					Alert alert = new Alert(AlertType.ERROR);
+					String contentText = String.format("User cannot register same course multiple times");
+					alert.setContentText(contentText);
+			                  alert.showAndWait();
 				}
 		}else {
-			alertErrorMessage("User cannot register more than 3 courses");
+			//alertErrorMessage("User cannot register more than 3 courses");
+			Alert alert = new Alert(AlertType.ERROR);
+			String contentText = String.format("User cannot register more than 3 courses");
+			alert.setContentText(contentText);
+	                  alert.showAndWait();
 		}
-		
+			c.close();
 	}
 	
 	public void alertErrorMessage(String s) {
@@ -143,31 +148,38 @@ public class StudentController implements Initializable {
 
 	}
 	
-	public void loaddatafromdb() {
+	public void loaddatafromdb (ActionEvent event) throws SQLException{
 		System.out.println("inside load data from db========================");
-		
+		Connection conn = dbConnection.getConnection();
+		ObservableList<CourseData> coursetable1;
+		coursetable1 = coursetable.getSelectionModel().getSelectedItems();
+		String selectedcoursecode = coursetable1.get(0).getCoursecode();
+		String selectedsectionno = coursetable1.get(0).getSeccode();
+		System.out.println(coursetable1.get(0).getCoursecode());
+		String dbcoursecode, dbsectionno,dbcoursesection,uicoursesection;
+		uicoursesection = selectedcoursecode.concat(selectedsectionno);
+		String sqlvalue = "Select Se.Course_code,Se.Sec_no, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name, count (Se.Sec_no) as Registered from \r\n" + 
+				" Section Se, Registration R, Staff St \r\n" + 
+				" where Se.Instructor_ssn = St.Staff_ssn and R.Course_code = Se.Course_code and R.Sec_no = Se.Sec_no \r\n" + 
+				" group by Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name; ";
 		try {
-			System.out.println("inside try of load data from dab============");
-			String sql = "Select Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name from Section Se, Staff St where Se.Instructor_ssn = St.Staff_ssn;";
-			System.out.println("inside load student data in student tab");
-			Connection conn = dbConnection.getConnection();
+			System.out.println("======+++++++++++++++++++++++++++++++++++++============");
 			this.data = FXCollections.observableArrayList();
-			ResultSet rs = conn.createStatement().executeQuery(sql);
-			
-			System.out.println("values of rs------------------------------------");
-			System.out.println(rs.toString());
-			remainingno = Integer.parseInt(rs.getString(3)) - registeredtotalno;
+			ResultSet rs = conn.createStatement().executeQuery(sqlvalue);
 			while(rs.next()) {
-				System.out.println("inside rs next");
-				System.out.println(rs.getString(2)+rs.getString(1)+rs.getString(3)+String.valueOf(registeredtotalno)+rs.getString(3)+rs.getString(4)+rs.getString(5)+rs.getString(6));
-				this.data.add(new CourseData(rs.getString(2),rs.getString(1),rs.getString(3),String.valueOf(registeredtotalno),String.valueOf(remainingno),rs.getString(4),rs.getString(5),rs.getString(6)));
-			}
+				System.out.println("inside rs next+++++++++++++++++++++++++++++++++++++++");
+				dbcoursesection = rs.getString(2).concat(rs.getString(1));	
+					System.out.println("inside rs if +++++++++++++++++++++++++++++++++++++++++++++");
+					System.out.println(rs.getString(2)+rs.getString(1)+rs.getString(3)+String.valueOf(registeredtotalno)+rs.getString(3)+rs.getString(4)+rs.getString(5)+rs.getString(6));
+					this.data.add(new CourseData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(7),String.valueOf(Integer.parseInt(rs.getString(3))-Integer.parseInt(rs.getString(7))),rs.getString(4),rs.getString(5),rs.getString(6)));
+				}
 			
 		}catch(SQLException ex){
 			
 			System.err.println("Error"+ex);
 			
 		}
+		conn.close();
 		
 		this.coursenocolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("coursecode"));
 		this.secnocolumn.setCellValueFactory(new PropertyValueFactory<CourseData, String>("seccode"));

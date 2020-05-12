@@ -7,16 +7,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginapp.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginapp.LoginController">
    <children>
-      <TextField fx:id="username" layoutX="129.0" layoutY="101.0" />
+      <TextField fx:id="username" layoutX="129.0" layoutY="101.0" prefHeight="31.0" prefWidth="211.0" />
       <Label layoutX="14.0" layoutY="21.0" text="Db Status" />
       <Label fx:id="dbstatus" layoutX="112.0" layoutY="21.0" prefHeight="21.0" prefWidth="181.0" />
       <Label layoutX="29.0" layoutY="106.0" prefHeight="21.0" prefWidth="87.0" text="Username" />
       <Label layoutX="34.0" layoutY="142.0" prefHeight="21.0" prefWidth="77.0" text="Password" />
-      <PasswordField fx:id="password" layoutX="129.0" layoutY="137.0" />
-      <ComboBox fx:id="combobox" layoutX="128.0" layoutY="184.0" prefHeight="31.0" prefWidth="187.0" promptText="Admin/Student" />
-      <Button fx:id="loginbutton" layoutX="128.0" layoutY="233.0" mnemonicParsing="false" onAction="#Login" prefHeight="31.0" prefWidth="187.0" text="Login" />
-      <Label fx:id="loginstatus" layoutX="29.0" layoutY="238.0" prefHeight="21.0" prefWidth="87.0" />
+      <PasswordField fx:id="password" layoutX="129.0" layoutY="137.0" prefHeight="31.0" prefWidth="211.0" />
+      <ComboBox fx:id="combobox" layoutX="128.0" layoutY="184.0" prefHeight="31.0" prefWidth="211.0" promptText="Admin/Student" />
+      <Button fx:id="loginbutton" layoutX="68.0" layoutY="295.0" mnemonicParsing="false" onAction="#Login" prefHeight="31.0" prefWidth="323.0" text="Login" />
+      <Label fx:id="loginstatus" layoutX="141.0" layoutY="223.0" prefHeight="59.0" prefWidth="187.0" />
    </children>
 </AnchorPane>
