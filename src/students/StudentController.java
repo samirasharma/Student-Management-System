@@ -62,7 +62,6 @@ public class StudentController implements Initializable {
 	private void loadStudentData(ActionEvent event) throws SQLException{
 		try {
 			System.out.println("inside try of load data from dab============");
-			//String sql = "Select Se.Sec_no,Se.Course_code, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name from Section Se, Staff St where Se.Instructor_ssn = St.Staff_ssn;";
 			String sql = "Select Se.Course_code,Se.Sec_no, Se.Max_enroll,Se.Weekday,Se.Class_time,St.Staff_name, count (Se.Sec_no) as Registered from \r\n" + 
 					" Section Se, Registration R, Staff St \r\n" + 
 					" where Se.Instructor_ssn = St.Staff_ssn and R.Course_code = Se.Course_code and R.Sec_no = Se.Sec_no \r\n" + 
@@ -175,6 +174,7 @@ public class StudentController implements Initializable {
 				}
 			
 		}catch(SQLException ex){
+			
 			
 			System.err.println("Error"+ex);
 			

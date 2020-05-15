@@ -117,6 +117,7 @@ public class AdminController implements Initializable{
 						 int spaceBetweenFirstAndLastName = rs.getString(3).indexOf(" ");
 						 String firstName = rs.getString(3).substring(0, spaceBetweenFirstAndLastName);
 						 String lastName = rs.getString(3).substring(spaceBetweenFirstAndLastName+1);
+						 
 						 //Now, swap the first and last name and put it back into the array
 						 System.out.println("inside swap last name and first name"+lastName+firstName);	
 						 System.out.println("final test before putting into table"+"-------"+lastName+firstName+rs.getString(1)+rs.getString(7)+rs.getString(4));
@@ -134,7 +135,7 @@ public class AdminController implements Initializable{
 		this.firstnamecolumn.setCellValueFactory(new PropertyValueFactory<StudentRecordData, String>("firstname"));
 		this.idcolumn.setCellValueFactory(new PropertyValueFactory<StudentRecordData, String>("id"));
 		this.majorcolumn.setCellValueFactory(new PropertyValueFactory<StudentRecordData, String>("major"));
-		//this.yearcolumn.setCellValueFactory(new PropertyValueFactory<StudentRecordData, String>("year"));
+		this.yearcolumn.setCellValueFactory(new PropertyValueFactory<StudentRecordData, String>("year"));
 		this.studentrecordtable.setItems(this.studentrecord);
 
 		

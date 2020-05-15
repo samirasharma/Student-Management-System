@@ -21,15 +21,14 @@
                            <children>
                               <TableView fx:id="studenttable" prefHeight="614.0" prefWidth="888.0">
                                 <columns>
-                                  <TableColumn fx:id="coursecodecolumn" prefWidth="101.0" text="Course_code" />
-                                  <TableColumn fx:id="seccodecolumn" prefWidth="86.0" text="Sec_code" />
-                                    <TableColumn fx:id="coursenamecolumn" prefWidth="113.0" text="Course name" />
+                                  <TableColumn fx:id="coursecodecolumn" prefWidth="129.0" text="Course_code" />
+                                  <TableColumn fx:id="seccodecolumn" prefWidth="75.0" text="Sec_code" />
+                                    <TableColumn fx:id="coursenamecolumn" prefWidth="109.0" text="Course name" />
                                     <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
-                                    <TableColumn fx:id="timecolumn" prefWidth="94.0" text="Time" />
-                                    <TableColumn fx:id="placecolumn" prefWidth="132.0" text="Place" />
-                                    <TableColumn fx:id="weekdaycolumn" minWidth="0.0" prefWidth="87.0" text="Weekday" />
-                                    <TableColumn fx:id="instructorcolumn" prefWidth="140.0" text="Instructor" />
-                                    <TableColumn fx:id="studentcolumn" prefWidth="140.0" text="Student" />
+                                    <TableColumn fx:id="timecolumn" prefWidth="107.0" text="Time" />
+                                    <TableColumn fx:id="placecolumn" prefWidth="106.0" text="Place" />
+                                    <TableColumn fx:id="weekdaycolumn" minWidth="0.0" prefWidth="140.0" text="Weekday" />
+                                    <TableColumn fx:id="instructorcolumn" prefWidth="194.0" text="Instructor" />
                                 </columns>
                               </TableView>
                            </children>
